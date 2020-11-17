@@ -1,0 +1,31 @@
+<div class="todo-item">
+  <div class="todo-item-left">
+    <input
+      [(ngModel)]="todo.completed"
+      type="checkbox"
+    >
+    <div
+      *ngIf="!todo.edit ; else editingTodo"
+      (dblclick)="editTodo(todo)"
+      class="todo-item-label"
+      [ngClass]="{completed:todo.completed}"
+    >{{todo.title}}
+    </div>
+  </div>
+  <ng-template #editingTodo>
+    <input
+      [(ngModel)]="todo.title"
+      type="text"
+      class="todo-item-edit"
+      (blur)="doneEdit(todo)"
+      (keyup.enter)="doneEdit(todo)"
+      (keyup.escape)="cancelEdit(todo)"
+      autofocus
+    >
+  </ng-template>
+  <div
+    (click)="deleteTodo(todo.id)"
+    class="remove-item">
+    &times;
+  </div>
+</div>
