@@ -1,12 +1,13 @@
 <div class="todo-item">
   <div class="todo-item-left">
     <input
+      (click)="todoService.updateCompleted(todo)"
       [(ngModel)]="todo.completed"
       type="checkbox"
     >
     <div
       *ngIf="!todo.edit ; else editingTodo"
-      (dblclick)="editTodo(todo)"
+      (dblclick)="todoService.editTodo(todo)"
       class="todo-item-label"
       [ngClass]="{completed:todo.completed}"
     >{{todo.title}}
@@ -17,14 +18,14 @@
       [(ngModel)]="todo.title"
       type="text"
       class="todo-item-edit"
-      (blur)="doneEdit(todo)"
-      (keyup.enter)="doneEdit(todo)"
-      (keyup.escape)="cancelEdit(todo)"
+      (blur)="todoService.doneEdit(todo)"
+      (keyup.enter)="todoService.doneEdit(todo)"
+      (keyup.escape)="todoService.cancelEdit(todo)"
       autofocus
     >
   </ng-template>
   <div
-    (click)="deleteTodo(todo.id)"
+    (click)="todoService.deleteTodo(todo.id)"
     class="remove-item">
     &times;
   </div>
